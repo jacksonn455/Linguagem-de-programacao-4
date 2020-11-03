@@ -16,9 +16,9 @@ class Count extends Thread {
         try {
             for (int i = 0; i < 5; i++) {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                Date hora = Calendar.getInstance().getTime(); // Ou qualquer outra forma que tem
+                Date hora = Calendar.getInstance().getTime(); 
                 String dataFormatada = sdf.format(hora);
-                //instância um objeto da classe Random usando o construtor básico
+              
                 Random gerador = new Random();
 
                 int k = gerador.nextInt(26);
