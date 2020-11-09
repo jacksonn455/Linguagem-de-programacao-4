@@ -17,7 +17,9 @@ public class CavaloThread implements Runnable {
     public void run() {
         while (distPercorrido < distMax) {
             distPercorrido += velocidade;
-            System.out.println(nome + " Chegou!");
         }
+        if(distPercorrido >- distMax){
+            System.out.println(nome + " Chegou!");
+            }
     }
 }
