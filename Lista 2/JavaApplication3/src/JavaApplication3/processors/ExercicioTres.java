@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class ExercicioTresProcessor implements Runnable{
+public class ExercicioTres implements Runnable{
 	private int prioridade;
 	
 	
-	public ExercicioTresProcessor(int prioridade) {
+	public ExercicioTres(int prioridade) {
 		this.prioridade = prioridade;
 	}
 	
@@ -17,10 +17,10 @@ public class ExercicioTresProcessor implements Runnable{
 		try {
 			LocalDateTime now = LocalDateTime.now();
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");  
-			System.out.println("Rodei em " + dtf.format(now) + " com prioridade " + this.getPrioridade());
+			System.out.println("Thread executada em " + dtf.format(now) + " com prioridade " + this.getPrioridade());
 			Thread.currentThread().setPriority(this.getPrioridade());
 		} catch (Exception e) {
-			System.out.println("[ERROR] " + e.getMessage());
+			System.out.println("caso de erro: " + e.getMessage());
 		}	
 	}
 
