@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import Slide3.processors.ExercicioTresProcessor;
+import JavaApplication3.processors.ExercicioTresProcessor;
 
 public class Exercicio3 {
 	private static int getRandomNumberInRange(int min, int max) {
