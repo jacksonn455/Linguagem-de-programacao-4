@@ -9,13 +9,16 @@ package javaapplication4;
  *
  * @author Avell
  */
-public class JavaApplication4 {
+public class CMensagem extends Thread {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    private int ID;
+
+    public CMensagem(int _ID) {
+        this.ID = _ID;
     }
-    
+
+    @Override
+    public void run() {
+        System.out.printf("\n A thread %d foi sorteada", this.ID);
+    }
 }
