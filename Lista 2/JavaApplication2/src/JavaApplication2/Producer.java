@@ -1,49 +1,54 @@
 package JavaApplication2;
 
-// A classe Producer representa a thread Produtora em um relacionamento
-// Produtor/Consumidor
 import java.util.Random;
 
-// O método run de Producer armazena os valores de 1 a 10 no buffer
 public class Producer implements Runnable {
 
-    private static Random generator = new Random(); // gerador de números aleatórios
-    private Buffer sharedLocation;  // referência a objeto compartilhado
+    private static Random generator = new Random();
+    private Buffer sharedLocation;
 
     // construtor
     public Producer(Buffer shared) {
         sharedLocation = shared;
-    } // fim do construtor Producer
+    }
 
-    // armazena os valores de 1 a 10 em sharedLocation
     @Override
     public void run() {
-        int sum = 0;
+        for (int count = 1; count <= 5;) {
+            try {
+                Random random = new Random();
+                int gerar = random.nextInt(101);
+                System.out.println("Numero gerado: " + gerar);
+                Boolean ehPrimo = isPrimo(gerar);
 
-        for (int count = 1; count <= 5; count++) {
-            Random gerador = new Random();
-            int k = gerador.nextInt(10);
-            
-            //numeros primos
-            if (k % count == 0) {
-                try // dorme de 0 a 3 segundos, então coloca valor no buffer
-                {
+                if (ehPrimo) {
+                    sharedLocation.set(gerar);
+                    count++;
+                    Thread.sleep(generator.nextInt(3000));
+                }
+            } catch (InterruptedException exception) {
+                exception.printStackTrace();
+            }
+        }
 
-                    // a thread dorme... espera sincronizada
-                    Thread.sleep(1000);
-                    sharedLocation.set(count); // configura o valor no buffer
-                    sum += count; // incrementa a soma dos valores
-                    //System.out.printf("\t\t%2d\n", sum); // imprime o somatório
-                } // fim do try
-                // se a thread adormecida é interrompida, imprime rastreamento de pilha
-                catch (InterruptedException exception) {
-                    exception.printStackTrace();
-                } // fim do catch
-            } // fim do for
-
-            System.out.printf("\n%s\n%s\n",
-                    "Produtor terminou a produção de dados",
-                    "Fim do Produtor!\n");
-        } // fim do método run
+        System.out.printf("\n%s\n%s\n", "Produtor terminou a produção de dados", "Fim do Produtor!\n");
     }
-} // fim classe Producer
+
+    public Boolean isPrimo(int primo) {
+        boolean isPrimo = true;
+        int divisor = 0;
+        for (int i = 2; i <= primo; i++) {
+            if (((primo % i) == 0) && (i != primo)) {
+                isPrimo = false;
+                divisor = i;
+                break;
+            }
+        }
+        if (isPrimo) {
+            System.out.println("o número é primo");
+        } else {
+            System.out.println("o numero não é primo");
+        }
+        return isPrimo;
+    }
+}

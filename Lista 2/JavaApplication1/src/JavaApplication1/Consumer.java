@@ -1,5 +1,6 @@
 package JavaApplication1;
 
+import java.security.Provider.Service;
 // A classe Consumer representa a thread consumidora em um relacionamento
 // Produtor/Consumidor
 // O método run da classe Consumer itera dez vezes lendo um valor do buffer
@@ -24,24 +25,19 @@ public class Consumer implements Runnable {
             try // dorme de 0 a 3 segundos, então lê valor no buffer
             {
                 // a thread dorme... espera sincronizada
-
-                if (count % 2 == 0 || count >= 0) {
-                    sum += count;
-                }
-
-                if (count % 2 == 0 || count < 0) {
-                    sum += count;
-                }
-
-                if (count % 2 != 0 || count >= 0) {
-                     sum += count;
-                }
-
-                if (count % 2 != 0 || count < 0) {
-                     sum += count;
-                }
-
                 Thread.sleep(generator.nextInt(3000));
+
+                //Atividade exercicio 1
+                if (sharedLocation != null) {
+                    int bufferValue = sharedLocation.get();
+
+                    System.out.println("\nValor: " + bufferValue);
+                    System.out.println("Negativo: " + Services.isNegative(bufferValue));
+                    System.out.println("Odd: " + Services.isOdd(bufferValue));
+                    System.out.println("Par: " + Services.isPair(bufferValue));
+                    System.out.println("Positivo: " + Services.isPositive(bufferValue));
+                }
+
                 sum += sharedLocation.get(); // adiciona valor lido à soma
                 //System.out.printf("\t\t\t\t%2d\n", sum); // imprime o somatório
             } // fim do try
